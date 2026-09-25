@@ -10,7 +10,7 @@
 /* Introduction portrait: crop the original photo around the face without altering it. */
 .intro-heading{display:grid;grid-template-columns:minmax(0,1fr) 160px;gap:28px;align-items:center}
 .portrait-frame{position:relative;width:160px;aspect-ratio:1;border-radius:50%;overflow:hidden;background:var(--soft)}
-.portrait{position:absolute;display:block;width:409.091%;max-width:none;height:auto;left:-181.818%;top:-245.455%}
+.portrait{position:absolute;display:block;width:368.182%;max-width:none;height:auto;left:-158.636%;top:-215.909%}
 .about-intro{color:var(--muted)}
 .sidebar-role .location,.sidebar-role .relocation{display:block}
 .sidebar-role .relocation{margin-top:4px}
@@ -27,3 +27,17 @@
   .portrait-frame{order:-1;width:124px}
   .intro .eyebrow{font-size:.6875rem;letter-spacing:.08em}
 }
+
+/* Small, locally hosted brand marks keep titles scannable without adding cards. */
+.entry-title{display:flex;align-items:center;gap:12px;min-width:0}
+.entry-title .title-text{flex:1;min-width:0}
+.project h3.entry-title a{width:100%;align-items:center;gap:12px}
+.project h3 a .title-text{font-size:inherit;font-weight:inherit;color:inherit}
+.brand-logo,.brand-monogram{display:block;width:36px;height:36px;flex:0 0 36px;object-fit:contain}
+.brand-logo-wide{width:60px;flex-basis:60px}
+.brand-monogram,.project h3 a .brand-monogram{display:grid;place-items:center;border:1px solid var(--line);border-radius:8px;background:var(--soft);font-size:.75rem;font-weight:650;letter-spacing:.02em;color:var(--muted)}
+.job-heading{align-items:center}
+.education .entry-title{font-size:1.0625rem}
+@media(max-width:720px){.entry-title,.project h3.entry-title a{gap:10px}.brand-logo,.brand-monogram{width:30px;height:30px;flex-basis:30px}.brand-logo-wide{width:50px;flex-basis:50px}.job-heading{align-items:flex-start}}
+
+.project h3 a .brand-symbol{font-size:1.25rem}
