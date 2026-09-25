@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DrivMi · Interactive project demo</title>
+  <meta name="description" content="Explore DrivMi’s designated-driver concept: request a ride for you and your car, match with a driver, verify pickup, and finish the trip. Interactive simulation.">
+  <meta name="theme-color" content="#1944cc">
+  <link rel="icon" href="../logos/drivmi.png"><link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.mjs"></script>
+</head>
+<body>
+  <a class="skip" href="#demo">Skip to demo</a>
+  <header class="site-header"><a href="./" aria-label="DrivMi home"><img src="../logos/drivmi.png" width="514" height="205" alt="DrivMi"></a><div><span class="demo-label">Interactive demo</span><a href="../#projects">Back to portfolio <span aria-hidden="true">↗</span></a></div></header>
+  <main>
+    <section class="intro"><p class="eyebrow">A designated driver. Your own car.</p><h1>You and your car.<br><span>Home together.</span></h1><p>Leave the driving to someone else. Explore the rider and driver sides of the original mobile app in one browser demo.</p></section>
+    <section id="demo" class="demo" aria-label="Interactive ride simulation">
+      <div class="demo-toolbar"><div class="role-switch" role="group" aria-label="Demo perspective"><button data-role="rider" aria-pressed="true">Rider view</button><button data-role="driver" aria-pressed="false">Driver view</button></div><button id="reset" class="text-button">Reset demo <span aria-hidden="true">↺</span></button></div>
+      <div class="demo-grid">
+        <section class="controls" aria-labelledby="panel-title"><div id="panel"></div></section>
+        <section class="journey" aria-labelledby="map-title">
+          <div class="map-heading"><div><p class="eyebrow">The journey</p><h2 id="map-title">A ride for both of you.</h2></div><span id="status-badge" class="status-badge">Choose a route</span></div>
+          <div class="map">
+            <svg viewBox="0 0 640 440" role="img" aria-labelledby="map-label map-description">
+              <title id="map-label">Illustrated sample route</title><desc id="map-description">A schematic neighborhood map. The route and markers change with the selected demo trip. This is not a navigation map.</desc>
+              <defs><pattern id="blocks" width="78" height="70" patternUnits="userSpaceOnUse"><rect width="78" height="70" fill="#f0f2f5"/><rect x="8" y="8" width="60" height="52" rx="9" fill="#e5e9ed"/></pattern></defs>
+              <rect width="640" height="440" fill="url(#blocks)"/>
+              <path d="M-30 10C130 110 100 270 295 250S430 340 700 460" fill="none" stroke="#c9e2f3" stroke-width="42"/>
+              <path d="M0 150H640M200 0V440M0 340H640M510 0V440" fill="none" stroke="#fff" stroke-width="15"/>
+              <rect x="375" y="265" width="96" height="59" rx="18" fill="#dce8d9"/><rect x="32" y="28" width="110" height="65" rx="18" fill="#dce8d9"/>
+              <g fill="#707a88" font-size="11" font-family="system-ui"><text x="40" y="55">RIVERSIDE</text><text x="365" y="72">ARTS DISTRICT</text><text x="398" y="301">CITY PARK</text><text x="36" y="408">RESIDENTIAL</text></g>
+              <path id="route-shadow" fill="none" stroke="white" stroke-width="12" stroke-linejoin="round" stroke-linecap="round"/>
+              <path id="route-line" fill="none" stroke="#315cff" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+              <path id="approach-line" fill="none" stroke="#8495b9" stroke-width="3" stroke-dasharray="6 7"/>
+              <g id="pickup-marker"><circle r="14" fill="#fff" stroke="#1944cc" stroke-width="3"/><text y="4" text-anchor="middle" fill="#1944cc" font-size="11" font-family="system-ui" font-weight="700">A</text></g>
+              <g id="home-marker"><circle r="14" fill="#1944cc" stroke="white" stroke-width="3"/><text y="4" text-anchor="middle" fill="white" font-size="11" font-family="system-ui" font-weight="700">B</text></g>
+              <g id="driver-marker"><circle r="14" fill="#172336" stroke="white" stroke-width="3"/><path d="M-7 3V-3L-4-7H4L7-3V3ZM-7-2H7M-5 3V6M5 3V6" fill="none" stroke="white" stroke-width="1.6" stroke-linejoin="round"/></g>
+            </svg><p class="map-caption">Illustrated route · sample locations</p>
+          </div>
+          <div class="route-summary"><div><span class="point">A</span><div><small>Pickup</small><strong id="pickup-label"></strong></div></div><span class="route-arrow" aria-hidden="true">→</span><div><span class="point destination">B</span><div><small>Destination</small><strong id="destination-label"></strong></div></div></div>
+          <ol class="progress" aria-label="Trip progress"><li data-stage="requested">Request</li><li data-stage="matched">Match</li><li data-stage="arrived">Pickup</li><li data-stage="in_progress">Ride</li><li data-stage="completed">Home</li></ol>
+        </section>
+      </div>
+      <p class="simulation-note"><strong>Simulation only.</strong> People, locations, ratings, fares, and travel times are fictional. Nothing is booked or charged. The demo does not use your location or connect to the app’s services.</p>
+      <p id="announcement" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+    </section>
+    <section class="about" aria-labelledby="about-title"><div><p class="eyebrow">Behind the project</p><h2 id="about-title">Two perspectives.<br>One shared journey.</h2></div><div><p>The React Native prototype connects passengers who want to travel in their own vehicle with nearby designated drivers. Its original flows include rider and driver profiles, ride requests, pickup-code confirmation, trip status, and reviews.</p><p>The mobile app uses Expo, Firebase, and Google Maps. This browser adaptation demonstrates the interaction without accounts, API keys, or a running server.</p><div class="tech"><span>React Native</span><span>Expo</span><span>Firebase</span><span>Google Maps</span></div></div></section>
+  </main><footer><span>DrivMi · Project presentation</span><a href="../">Zhandos Brown’s portfolio ↗</a></footer>
+  <noscript><p class="no-script">Enable JavaScript to explore the ride simulation. No account is required.</p></noscript>
+</body>
+</html>

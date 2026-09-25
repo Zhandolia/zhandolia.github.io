@@ -17,4 +17,6 @@ Retrieved September 25, 2026. Brand marks identify the projects and organization
 - `oqiga.ico`: https://github.com/Zhandolia/oqiga.ai/blob/main/public/favicon.ico
 - `spark.png`: https://www.bu.edu/spark/files/2023/08/logo.png
 
-Ring Dynamics retains the boxing-glove symbol used in its own header. DrivMi has only default framework icon assets, and N-Body has no dedicated logo; the portfolio uses neutral DM / NB initials for those two projects, not official logos.
+Ring Dynamics retains the boxing-glove symbol used in its own header. N-Body has no dedicated logo; the portfolio uses neutral NB initials for that project, not an official logo.
+
+- `drivmi.png`: original `assets/logo.png` supplied through the user-authorized private DrivMi collaboration repository. Replaces the placeholder initials after the correct repository was identified.
