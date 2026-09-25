@@ -7,4 +7,23 @@
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 @media print{.layout{display:block;padding:0;max-width:none}.sidebar,.intro-links,.contact-links,footer,.skip-link{display:none}.intro{padding:0 0 24px}h1{font-size:2rem}.section{padding:24px 0}.project,.job{break-inside:avoid}details::details-content{display:block}a{text-decoration:none}.email{font-size:1rem}body{font-size:11pt}.section-heading{margin-bottom:16px}}
 
-.about-intro{display:grid;grid-template-columns:minmax(0,1fr) 210px;gap:28px;align-items:start}.about-intro>div{grid-column:1;grid-row:1;color:var(--muted)}.portrait{display:block;grid-column:2;grid-row:1;width:100%;height:auto;border-radius:4px}.sidebar-role span{display:inline-block;max-width:200px}@media(max-width:980px){.about-intro{grid-template-columns:minmax(0,1fr) 160px;gap:20px}}@media(max-width:720px){.sidebar-role{grid-column:1/-1}.resume-link{grid-row:1;align-self:start;margin-top:5px}.identity{padding-right:100px;gap:9px}.identity .name{font-size:.9375rem}.about-intro{grid-template-columns:1fr}.portrait{grid-column:1;grid-row:1;width:min(100%,300px);margin-bottom:4px}.about-intro>div{grid-column:1;grid-row:2}.sidebar-role span{max-width:none}}
+/* Introduction portrait: crop the original photo around the face without altering it. */
+.intro-heading{display:grid;grid-template-columns:minmax(0,1fr) 160px;gap:28px;align-items:center}
+.portrait-frame{position:relative;width:160px;aspect-ratio:1;border-radius:50%;overflow:hidden;background:var(--soft)}
+.portrait{position:absolute;display:block;width:409.091%;max-width:none;height:auto;left:-181.818%;top:-245.455%}
+.about-intro{color:var(--muted)}
+.sidebar-role .location,.sidebar-role .relocation{display:block}
+.sidebar-role .relocation{margin-top:4px}
+@media(min-width:721px) and (max-width:1050px){.intro-heading{grid-template-columns:minmax(0,1fr) 124px;gap:20px}.portrait-frame{width:124px}.intro-heading h1{font-size:clamp(2.25rem,4.5vw,3rem)}}
+@media(max-width:720px){
+  .sidebar-role{grid-column:1/-1;grid-row:2}
+  .sidebar-role span:before{content:none}
+  .sidebar-role .location{margin-top:2px}
+  .sidebar-role .relocation{margin-top:5px}
+  .resume-link{grid-row:1;align-self:start;margin-top:5px}
+  .identity{grid-row:1;padding-right:100px;gap:9px}
+  .identity .name{font-size:.9375rem}
+  .intro-heading{display:flex;flex-direction:column;align-items:flex-start;gap:22px}
+  .portrait-frame{order:-1;width:124px}
+  .intro .eyebrow{font-size:.6875rem;letter-spacing:.08em}
+}

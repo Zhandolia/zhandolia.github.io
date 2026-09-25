@@ -10,7 +10,7 @@
   <meta property="og:type" content="website">
   <title>Zhandos Brown — Software Engineer</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231e40af'/%3E%3Ctext x='32' y='42' text-anchor='middle' fill='white' font-family='Arial,sans-serif' font-size='29' font-weight='700'%3EZB%3C/text%3E%3C/svg%3E">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20260925-portrait">
   <script src="script.js" defer></script>
 </head>
 <body>
@@ -18,7 +18,7 @@
   <div class="layout">
     <header class="sidebar">
       <a class="identity" href="#top" aria-label="Zhandos Brown, back to top"><span class="monogram" aria-hidden="true">zb.</span><span class="name">Zhandos Brown</span></a>
-      <p class="sidebar-role">Software engineer<br><span>Dallas, Texas · U.S. citizen<br>Open to relocate</span></p>
+      <p class="sidebar-role">Software engineer<span class="location">Dallas, Texas · U.S. citizen</span><span class="relocation">Open to relocate</span></p>
       <nav aria-label="Main navigation">
         <a href="#projects"><span aria-hidden="true">01</span> Projects</a>
         <a href="#experience"><span aria-hidden="true">02</span> Experience</a>
@@ -30,8 +30,11 @@
     </header>
     <main id="main">
       <section class="intro" id="top" aria-labelledby="intro-title">
-        <p class="eyebrow">Mobile · Robotics · Web</p>
-        <h1 id="intro-title">I build software<br>that connects to<br><span>the real world.</span></h1>
+        <p class="eyebrow">Computer Vision · Robotics · Applied AI</p>
+        <div class="intro-heading">
+          <h1 id="intro-title">I build software<br>that connects to<br><span>the real world.</span></h1>
+          <div class="portrait-frame"><img class="portrait" src="zhandos-brown.webp" alt="Portrait of Zhandos Brown" width="900" height="1200" fetchpriority="high"></div>
+        </div>
         <p class="intro-copy">I’m Zhandos, a software engineer working across mobile apps, robotic perception, and interactive tools. My work spans production iOS at Fidelity, drone systems at Boston University, and projects of my own.</p>
         <div class="intro-links"><a class="primary-link" href="#projects">Explore my work <span aria-hidden="true">↓</span></a><a href="mailto:zhandos@bu.edu">Get in touch</a></div>
       </section>
@@ -86,8 +89,8 @@
 
       <section id="about" class="section" aria-labelledby="about-title">
         <div class="section-heading"><p class="eyebrow">03 / About</p><h2 id="about-title">A foundation in math.<br>A focus on building.</h2></div>
-        <div class="about-intro"><img class="portrait" src="zhandos-brown.webp" alt="Zhandos Brown outdoors in the mountains" width="900" height="1200" loading="lazy"><div><p>I’m from Kazakhstan and based in Dallas. My path into software began with high school robotics and grew into work on mobile products, computer vision, and tools for understanding the physical world.</p>
-        <p>I’m a U.S. citizen. Across my work, I’m especially interested in the place where mathematical models become useful, working software.</p></div></div>
+        <div class="about-intro"><p>I’m from Kazakhstan and based in Dallas. My path into software began with high school robotics and grew into work on mobile products, computer vision, and tools for understanding the physical world.</p>
+        <p>I’m a U.S. citizen. Across my work, I’m especially interested in the place where mathematical models become useful, working software.</p></div>
         <div class="education"><div><h3>Boston University</h3><p>B.S. Applied Mathematics</p></div><span class="date">Class of 2026</span><p class="coursework">Robotics &amp; Autonomous Systems · Linear Algebra · Probability · Mathematical Statistics · Analysis of Variance · Data Science in R · Linear Models · Introduction to Analysis II · Introduction to Stochastic Processes · Foundations of Mathematics</p></div>
         <h3 class="skills-title">Tools I work with</h3>
         <dl class="skills"><div><dt>Languages</dt><dd>TypeScript, JavaScript, Python, C++, Swift, Java, SQL</dd></div><div><dt>Interfaces</dt><dd>React, Next.js, React Native, SwiftUI, Three.js, WebGL</dd></div><div><dt>Backend & data</dt><dd>FastAPI, Node.js, REST, GraphQL, PostgreSQL, NumPy, Pydantic, Zod</dd></div><div><dt>Robotics & tools</dt><dd>ROS 2, PCL, Open3D, Linux, Git, Docker, AWS, automated testing, CI/CD</dd></div></dl>
