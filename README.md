@@ -6,10 +6,10 @@ A fast, accessible, single-page portfolio built with plain HTML, CSS, and a smal
 
 - `index.html`: introduction, projects, experience, education, skills, and contact details.
 - `styles.css`: layout, typography, colors, and responsive styles.
-- `script.js`: current-section navigation and the footer year.
+- `script.js`: current-section navigation, footer year, and the original procedural pixel-space animation.
 - `Zhandos-Brown-resume.pdf`: downloadable résumé; replace this file to update it.
 
-The two featured projects and three recent roles are visible immediately. Native expandable sections contain seven additional projects and six earlier roles. Navigation, links, and expandable sections work without JavaScript.
+All nine roles and nine projects are visible, with experience first and direct section navigation. The page includes photography, design, and skiing interests. Content and links work without JavaScript. The decorative canvas uses an original dithered planet, respects reduced-motion preferences, has a pause control, and stops animating when offscreen or in a background tab. No external animation assets or libraries are used.
 
 ## Local preview
 
