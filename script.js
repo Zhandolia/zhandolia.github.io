@@ -1,132 +1,110 @@
-// Original pixel-art worlds. All artwork is generated locally; no network assets.
+// Original, deterministic point-rendered spiral galaxy. No external imagery.
 (() => {
   const canvas = document.querySelector('#space');
   const button = document.querySelector('#motion-toggle');
   const context = canvas?.getContext('2d');
   if (!context || !button) return;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  const bayer = [0,8,2,10,12,4,14,6,3,11,1,9,15,7,13,5];
-  let seed = 4127;
-  const random = () => { seed = seed * 16807 % 2147483647; return (seed - 1) / 2147483646; };
-  const stars = Array.from({length:240}, () => ({x:random(),y:random(),phase:random()*6.28,size:random()>.96?2:1,speed:.2+random()*.7}));
-  let width = 0, height = 0, worlds = [], paused = reduced.matches;
-  let frame = 0, elapsed = 0, lastTime = 0;
-  let coverVisible = document.querySelector('#about').classList.contains('active') || !document.body.classList.contains('panels-ready');
+  let seed = 73129;
+  function random() { seed = seed * 16807 % 2147483647; return (seed - 1) / 2147483646; }
+  function normal() { return Math.sqrt(-2 * Math.log(Math.max(.00001, random()))) * Math.cos(2 * Math.PI * random()); }
+  const colors = ['#879ae0', '#a7b6f0', '#baa9e0', '#dfbed1', '#f0ccaf', '#ffe6cb'];
+  const particles = [];
+  // Three loose spiral arms, with a warmer, denser central bulge.
+  for (let i = 0; i < 5800; i++) {
+    const radius = Math.pow(random(), .72);
+    const angle = (i % 3) * Math.PI * 2 / 3 + radius * 6.8 + normal() * (.12 + radius * .27);
+    particles.push({ radius, angle, depth: normal() * .022, color: radius < .19 ? 5 : radius < .38 ? 4 : Math.floor(random() * 4), alpha: .26 + random() * .64, phase: random() * 6.28, size: random() > .987 ? 1.4 : .65 });
+  }
+  for (let i = 0; i < 1500; i++) {
+    const radius = Math.abs(normal()) * .12;
+    particles.push({ radius, angle: random() * Math.PI * 2, depth: normal() * .016, color: random() > .4 ? 5 : 4, alpha: .35 + random() * .5, phase: random() * 6.28, size: .65 });
+  }
+  const stars = Array.from({length:155}, () => ({x:random(),y:random(),alpha:.12+random()*.55,size:random()>.98?2:1,phase:random()*6.28}));
+  let width = 0, height = 0, radius = 0, tilt = 0, field = null;
+  let frame = 0, elapsed = 0, lastTime = 0, paused = reduced.matches;
+  let active = document.querySelector('#about').classList.contains('active') || !document.body.classList.contains('panels-ready');
+  let inView = true;
 
-  function makeWorld(radius, kind) {
-    const ringed = kind === 'ringed';
-    const extent = ringed ? 2.36 : 1.08;
-    const size = Math.ceil(radius * extent * 2);
-    const art = document.createElement('canvas');
-    art.width = size; art.height = size;
-    const paint = art.getContext('2d');
-    const middle = size / 2;
-    const tilt = .68, cos = Math.cos(tilt), sin = Math.sin(tilt);
-    for (let y = 0; y < size; y++) {
-      for (let x = 0; x < size; x++) {
-        const dx = (x-middle)/radius, dy = (y-middle)/radius;
-        const d = dx*dx+dy*dy;
-        const u = dx*cos+dy*sin, v = -dx*sin+dy*cos;
-        const rd = Math.hypot(u/1.85,v/.55);
-        const ring = ringed && rd>.72 && rd<1.22;
-        let brightness = 0, light = '#d9d6cf', dark = '#1e1b18';
-        if (ring && (d>1 || v>.1)) {
-          const gap = rd>1.03 && rd<1.065;
-          brightness = gap ? .025 : (.64+.21*Math.sin(rd*150))*(.85-.18*dx);
-          if (u>.35 && v<.18) brightness *= .22;
-          light = '#d9d6cf'; dark = '#1e1b18';
-        } else if (d<=1) {
-          const z = Math.sqrt(1-d);
-          const illumination = Math.max(0,-.61*dx-.4*dy+.57*z);
-          brightness = illumination*(.81+.16*Math.sin((dy+dx*.1)*37));
-          if (kind==='blue') {
-            const land = Math.sin(dx*9+Math.sin(dy*7))+Math.cos(dy*13+z*5)>.6;
-            const cloud = Math.sin(dx*18+dy*20)*Math.sin(z*16+dy*9)>.68;
-            light = cloud ? '#d5e5d6' : land ? '#9da987' : '#75aaa9';
-            dark = land ? '#293e32' : '#1c3a42';
-            brightness = illumination*(cloud?1.1:.9);
-          } else if (kind==='rust') {
-            light = '#d9a67d'; dark = '#513a2f';
-            brightness = illumination*(.75+.2*Math.sin(dx*17+Math.cos(dy*9)));
-          } else if (kind==='moon') {
-            light = '#b9c2b9'; dark = '#2b3635';
-            brightness = illumination*(.7+.25*Math.sin(dx*15)*Math.cos(dy*19));
-          }
-        } else continue;
-        const threshold = (bayer[(y%4)*4+x%4]+.5)/16;
-        paint.fillStyle = brightness>threshold ? light : dark;
-        paint.fillRect(x,y,1,1);
+  function resize() {
+    // Use layout dimensions so an expanding panel cannot distort the artwork.
+    const cssWidth = canvas.clientWidth, cssHeight = canvas.clientHeight;
+    if (!cssWidth || !cssHeight) return;
+    const ratio = Math.max(2, cssWidth / 700);
+    const nextWidth = Math.ceil(cssWidth / ratio), nextHeight = Math.ceil(cssHeight / ratio);
+    if (width === nextWidth && height === nextHeight) return;
+    width = canvas.width = nextWidth; height = canvas.height = nextHeight;
+    context.imageSmoothingEnabled = false;
+    tilt = cssWidth < 600 ? -.92 : -.3;
+    const xExtent = Math.sqrt(Math.cos(tilt) ** 2 + (.52 * Math.sin(tilt)) ** 2);
+    const yExtent = Math.sqrt(Math.sin(tilt) ** 2 + (.52 * Math.cos(tilt)) ** 2);
+    radius = Math.min(width * .46 / xExtent, height * .43 / yExtent);
+    field = document.createElement('canvas'); field.width = width; field.height = height;
+    const sky = field.getContext('2d');
+    sky.fillStyle = '#0d1325'; sky.fillRect(0,0,width,height);
+    const halo = sky.createRadialGradient(width*.5,height*.52,0,width*.5,height*.52,radius*.9);
+    halo.addColorStop(0,'#313344'); halo.addColorStop(.2,'#22283d'); halo.addColorStop(.6,'#131b31'); halo.addColorStop(1,'#0d1325');
+    sky.fillStyle = halo; sky.fillRect(0,0,width,height);
+    for (const star of stars) {
+      sky.fillStyle = `rgba(172,186,225,${star.alpha})`;
+      const x = Math.floor(star.x*width), y = Math.floor(star.y*height);
+      sky.fillRect(x,y,1,1);
+      if (star.size===2) {
+        sky.globalAlpha=.35;
+        sky.fillRect(x-2,y,5,1); sky.fillRect(x,y-2,1,5);
+        sky.globalAlpha=1;
       }
     }
-    return art;
-  }
-  function resize() {
-    // Layout dimensions stay stable while the page is rotating in 3D.
-    const bounds = { width: canvas.clientWidth, height: canvas.clientHeight };
-    // A deliberately low resolution makes square pixels visible, even on Retina.
-    const newWidth = Math.max(1,Math.ceil(bounds.width/3));
-    const newHeight = Math.max(1,Math.ceil(bounds.height/3));
-    if (newWidth===width && newHeight===height) return;
-    width = canvas.width = newWidth; height = canvas.height = newHeight;
-    context.imageSmoothingEnabled = false;
-    const mobile = bounds.width<700;
-    const r = Math.min(width*.29,height*.48);
-    worlds = [{art:makeWorld(r,'ringed'),x:.63,y:.68,phase:0,drift:2}];
     draw(elapsed);
   }
   function draw(time) {
-    context.fillStyle = '#1e1b18'; context.fillRect(0,0,width,height);
-    for (const star of stars) {
-      const alpha = .24+.27*(1+Math.sin(star.phase+time*.0005));
-      context.fillStyle = `rgba(216,213,205,${alpha})`;
-      const x = Math.floor((star.x*width+time*.001*star.speed)%width);
-      const y = Math.floor(star.y*height);
-      context.fillRect(x,y,star.size,star.size);
-      if (star.size===2) {
-        context.globalAlpha=.4;
-        context.fillRect(x-2,y,6,1); context.fillRect(x,y-2,1,6);
-        context.globalAlpha=1;
-      }
+    if (!field) return;
+    context.drawImage(field,0,0);
+    const spin = time * .000023;
+    const cos = Math.cos(tilt), sin = Math.sin(tilt);
+    const cx = width*.5, cy = height*.52;
+    context.globalCompositeOperation = 'lighter';
+    for (const point of particles) {
+      const a = point.angle + spin;
+      const x = Math.cos(a)*point.radius*radius;
+      const y = (Math.sin(a)*point.radius*.52+point.depth)*radius;
+      const px = Math.round(cx + x*cos-y*sin);
+      const py = Math.round(cy + x*sin+y*cos);
+      const twinkle = .83+.17*Math.sin(point.phase+time*.001);
+      context.globalAlpha=point.alpha*twinkle;
+      context.fillStyle=colors[point.color];
+      context.fillRect(px,py,point.size,point.size);
     }
-    for (const world of worlds) {
-      const drift = Math.sin(time*.00025+world.phase)*world.drift;
-      const x = Math.round(world.x*width-world.art.width/2);
-      const y = Math.round(world.y*height-world.art.height/2+drift);
-      context.drawImage(world.art,x,y);
+    context.globalAlpha=1;
+    context.globalCompositeOperation='source-over';
+    // Sparse foreground starlight keeps the still sky connected to the animation.
+    context.fillStyle='#d8dcf1';
+    for (let i=0;i<stars.length;i+=19) {
+      const star=stars[i];
+      context.globalAlpha=.18+.3*(1+Math.sin(star.phase+time*.0007));
+      context.fillRect(Math.floor(star.x*width),Math.floor(star.y*height),1,1);
     }
-    // One brief, slow shooting star per 18-second cycle.
-    const streak = (time+3500)%18000;
-    if (streak<1800) {
-      const progress = streak/1800;
-      const x = Math.round(width*(.45+progress*.22)), y = Math.round(height*(.03+progress*.17));
-      for (let i=0;i<14;i++) {
-        context.fillStyle = `rgba(216,213,205,${(1-i/14)*.65})`;
-        context.fillRect(x-i,y-Math.floor(i*.4),1,1);
-      }
-    }
+    context.globalAlpha=1;
   }
   function tick(now) {
     if (now-lastTime>=1000/24) {
-      if (lastTime) elapsed+=Math.min(now-lastTime,100);
-      lastTime=now; draw(elapsed);
+      if(lastTime)elapsed+=Math.min(now-lastTime,100);
+      lastTime=now;draw(elapsed);
     }
     frame=requestAnimationFrame(tick);
   }
   function sync() {
-    cancelAnimationFrame(frame); lastTime=0;
+    cancelAnimationFrame(frame);lastTime=0;
     button.textContent=paused?'Play animation':'Pause animation';
     button.setAttribute('aria-pressed',String(paused));
-    if (!paused && coverVisible && !document.hidden) frame=requestAnimationFrame(tick);
+    if(!paused&&active&&inView&&!document.hidden)frame=requestAnimationFrame(tick);
   }
   button.hidden=false;
   button.addEventListener('click',()=>{paused=!paused;sync();});
   reduced.addEventListener('change',event=>{paused=event.matches;sync();});
   document.addEventListener('visibilitychange',sync);
-  document.addEventListener('panelchange',event=>{
-    coverVisible=event.detail.page==='about';
-    if (coverVisible) resize();
-    sync();
-  });
-  new ResizeObserver(()=>{if(coverVisible) resize();}).observe(canvas.parentElement);
+  document.addEventListener('panelchange',event=>{active=event.detail.page==='about';if(active)resize();sync();});
+  new ResizeObserver(()=>{if(active)resize();}).observe(canvas.parentElement);
+  if('IntersectionObserver' in window)new IntersectionObserver(entries=>{inView=entries[0].isIntersecting;sync();}).observe(canvas);
   resize();sync();
 })();
