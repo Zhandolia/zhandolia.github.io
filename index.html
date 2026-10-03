@@ -11,38 +11,42 @@
   <title>Zhandos Brown — Software Engineer</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%232d4938'/%3E%3Ctext x='32' y='42' text-anchor='middle' fill='white' font-family='Arial,sans-serif' font-size='29' font-weight='700'%3EZB%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css?v=20260930-space">
-  <script src="script.js?v=20260930-space" defer></script>
+  <link rel="stylesheet" href="book.css?v=20261002-book">
+  <script src="book.js?v=20261002-book" defer></script>
+  <script src="script.js?v=20261002-book" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <a class="identity" href="#top" aria-label="Zhandos Brown, back to top">zb<span>.</span></a>
-    <nav aria-label="Main navigation">
-      <a href="#experience">Experience</a>
-      <a href="#projects">Projects</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+    <nav aria-label="Chapters">
+      <a href="#top"><span>00</span> Cover</a>
+      <a href="#experience"><span>01</span> Experience</a>
+      <a href="#projects"><span>02</span> Projects</a>
+      <a href="#about"><span>03</span> About</a>
+      <a href="#contact"><span>04</span> Contact</a>
     </nav>
     <a class="resume-link" href="Zhandos-Brown-resume.pdf" target="_blank" rel="noopener">Résumé <span aria-hidden="true">↗</span><span class="sr-only"> (PDF, opens in a new tab)</span></a>
   </header>
-  <main id="main">
-    <section class="intro" id="top" aria-labelledby="intro-title">
+  <main id="main" aria-label="Portfolio book">
+    <section class="intro book-page" id="top" aria-labelledby="intro-title">
+      <div class="cover-edition" aria-hidden="true">FIELD NOTES / VOL. 01<span>ENGINEERING &amp; EXPLORATION</span></div>
       <div class="intro-content">
         <div class="hello"><div class="portrait-frame"><img class="portrait" src="zhandos-brown.webp" alt="Portrait of Zhandos Brown" width="900" height="1200" fetchpriority="high"></div><p class="eyebrow">Software engineer<br><span>Dallas, Texas</span></p></div>
-        <h1 id="intro-title">Zhandos Brown<span>.</span></h1>
-        <p class="intro-copy">I build software that connects to the real world. From mobile products at Fidelity to robotic perception at Boston University.</p>
+        <h1 id="intro-title">Zhandos<br> Brown<span>.</span></h1>
+        <p class="intro-copy">Software for the real world.<br>A mind somewhere among the stars.</p>
         <p class="focus">Computer vision / Robotics / Applied AI</p>
         <ul class="availability" aria-label="Location and work eligibility"><li>U.S. citizen</li><li>Open to relocate</li></ul>
-        <div class="intro-links"><a href="mailto:zhandos@bu.edu">Email ↗</a><a href="https://github.com/zhandolia">GitHub ↗</a><a href="https://www.linkedin.com/in/zhanbrown/">LinkedIn ↗</a></div>
+        <a class="open-book" href="#experience">Open the book <span aria-hidden="true">↗</span></a>
       </div>
-      <figure class="space-scene" aria-label="An animated, pixelated ringed planet among the stars">
-        <canvas id="space" width="400" height="340" aria-hidden="true"></canvas>
-        <figcaption><span aria-hidden="true">✦</span> A little curiosity goes a long way.</figcaption>
+      <figure class="space-scene" aria-label="A full-page pixel-art solar system with a ringed planet, a blue world, a rust-colored planet, moons, and drifting stars">
+        <canvas id="space" width="800" height="500" aria-hidden="true"></canvas>
+        <figcaption>AN EXPLORATION IN PIXELS<span aria-hidden="true">✦</span></figcaption>
         <button id="motion-toggle" type="button" aria-pressed="false" hidden>Pause animation</button>
       </figure>
     </section>
 
-      <section id="experience" class="section" aria-labelledby="experience-title">
+      <section id="experience" class="section book-page" aria-labelledby="experience-title">
         <div class="section-heading"><p class="eyebrow">01 / Experience</p><h2 id="experience-title">Experience</h2></div>
         <article class="job"><div class="job-heading"><h3 class="entry-title"><img class="brand-logo" src="logos/carpot.ico" alt="" width="36" height="36" loading="lazy" decoding="async"><span class="title-text">BumpAutos <span class="company-note">/ CarPot</span></span></h3><p class="date">Jan – Mar 2026</p></div><p class="role">Software Engineer Co-op, Mobile <span>· Remote</span></p><ul><li>Delivered 30+ React Native screens, translating product requirements and Figma designs into reusable components.</li><li>Built typed GraphQL data flows and secure authentication across a 600+ file TypeScript codebase.</li></ul><p class="stack">React Native · GraphQL · TanStack Query · Redux Toolkit</p></article>
         <article class="job"><div class="job-heading"><h3 class="entry-title"><img class="brand-logo" src="logos/fidelity.ico" alt="" width="36" height="36" loading="lazy" decoding="async"><span class="title-text">Fidelity Investments</span></h3><p class="date">Jun – Aug 2025</p></div><p class="role">Mobile Software Engineer Intern <span>· Merrimack, NH</span></p><ul><li>Reduced document-rendering latency by 70%, from 300 ms to 90 ms, across 100K+ daily sessions in NetBenefits Health.</li><li>Improved offline reliability by migrating GraphQL document APIs to REST across Swift, Java, Node.js, and SQL systems.</li></ul><p class="stack">SwiftUI · Swift · REST APIs · Java · SQL</p></article>
@@ -55,7 +59,7 @@
             <article class="job compact"><div class="job-heading"><h3 class="entry-title"><img class="brand-logo" src="logos/gradcompleks.png" alt="" width="36" height="36" loading="lazy" decoding="async"><span class="title-text">Gradcompleks Architectural</span></h3><p class="date">Jun – Aug 2020</p></div><p class="role">3D Design Intern</p><p>Modeled 5,600 km² of Kazakhstani terrain in 3ds Max using satellite data and architectural blueprints.</p></article>
       </section>
 
-      <section id="projects" class="section" aria-labelledby="projects-title">
+      <section id="projects" class="section book-page" aria-labelledby="projects-title">
         <div class="section-heading"><p class="eyebrow">02 / Projects</p><h2 id="projects-title">Things I’ve built</h2></div>
         <div class="project-grid">
         <article class="project featured">
@@ -82,7 +86,7 @@
         </div>
       </section>
 
-      <section id="about" class="section" aria-labelledby="about-title">
+      <section id="about" class="section book-page" aria-labelledby="about-title">
         <div class="section-heading"><p class="eyebrow">03 / About</p><h2 id="about-title">Beyond the keyboard</h2></div>
         <div class="about-intro"><p>I’m from Kazakhstan and based in Dallas. My path into software began with high school robotics and grew into work on mobile products, computer vision, and tools for understanding the physical world.</p>
         <p>Outside of engineering, I love photography, design, and skiing. I’m drawn to both making things and getting outside to see a little more of the world.</p></div>
@@ -92,13 +96,21 @@
         <dl class="skills"><div><dt>Languages</dt><dd>TypeScript, JavaScript, Python, C++, Swift, Java, SQL</dd></div><div><dt>Interfaces</dt><dd>React, Next.js, React Native, SwiftUI, Three.js, WebGL</dd></div><div><dt>Backend & data</dt><dd>FastAPI, Node.js, REST, GraphQL, PostgreSQL, NumPy, Pydantic, Zod</dd></div><div><dt>Robotics & tools</dt><dd>ROS 2, PCL, Open3D, Linux, Git, Docker, AWS, automated testing, CI/CD</dd></div></dl>
       </section>
 
-      <section id="contact" class="section contact" aria-labelledby="contact-title">
-        <div class="section-heading"><p class="eyebrow">04 / Contact</p><h2 id="contact-title">Let’s talk.</h2></div>
+      <section id="contact" class="section contact book-page" aria-labelledby="contact-title">
+        <div class="section-heading"><p class="eyebrow">04 / Contact</p><h2 id="contact-title">The next chapter<br>starts with a hello.</h2></div>
         <p>For engineering opportunities, collaborations, or a conversation about something you’re building.</p>
         <a class="email" href="mailto:zhandos@bu.edu">zhandos@bu.edu <span aria-hidden="true">↗</span></a>
         <div class="contact-links"><a href="https://github.com/zhandolia">GitHub</a><a href="https://www.linkedin.com/in/zhanbrown/">LinkedIn</a><a href="Zhandos-Brown-resume.pdf" download>Download résumé <span class="sr-only">(PDF)</span></a></div>
       </section>
-      <footer><span>© <span id="year">2026</span> Zhandos Brown</span><a href="#top">Back to top ↑</a></footer>
   </main>
+  <footer class="book-footer">
+    <a class="footer-name" href="#top">ZHANDOS BROWN<span>Software engineer</span></a>
+    <div class="footer-social"><a href="mailto:zhandos@bu.edu">Email ↗</a><a href="https://github.com/zhandolia">GitHub ↗</a><a href="https://www.linkedin.com/in/zhanbrown/">LinkedIn ↗</a></div>
+    <div class="book-controls" hidden>
+      <button id="previous-page" type="button" aria-label="Previous page">←</button>
+      <span id="page-indicator" aria-live="polite" aria-atomic="true">00 / 04 — Cover</span>
+      <button id="next-page" type="button" aria-label="Next page">→</button>
+    </div>
+  </footer>
 </body>
 </html>

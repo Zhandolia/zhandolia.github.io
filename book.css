@@ -1,0 +1,123 @@
+/* A viewport-sized book, progressively enhanced from readable HTML sections. */
+:root { --bg:#111615; --ink:#efeee5; --accent:#d3dda9; }
+html { scroll-behavior:auto; }
+body { background:var(--bg); }
+.site-header { max-width:none; height:60px; padding:0 30px; border:0; background:var(--bg); position:relative; }
+nav { gap:28px; }
+nav a { font-size:12px; }
+nav a span { font:9px var(--mono); opacity:.55; margin-right:5px; }
+nav a[aria-current] { color:var(--ink); }
+nav a[aria-current] span { color:var(--accent); opacity:1; }
+.resume-link { font-size:12px; }
+main { max-width:none; margin:0 18px; }
+.book-page { background:var(--bg); }
+.intro { position:relative; display:block; min-height:calc(100svh - 144px); isolation:isolate; padding:0; overflow:hidden; }
+.cover-edition { position:absolute; top:28px; left:32px; right:32px; z-index:2; display:flex; justify-content:space-between; font:10px var(--mono); letter-spacing:.15em; color:#bfcabc; }
+.intro-content { position:relative; z-index:2; padding:110px 5vw 55px; width:55%; pointer-events:none; }
+.intro-content a { pointer-events:auto; }
+.hello { gap:12px; }
+.hello .eyebrow { font-size:10px; }
+.hello .eyebrow span { font-size:9px; }
+.portrait-frame { width:44px; }
+h1 { font-family:'Segoe UI',Arial,sans-serif; font-size:clamp(66px,7.8vw,130px); line-height:.88; letter-spacing:-.065em; font-weight:600; margin:24px 0; }
+.intro-copy { color:#d4d9cf; font-size:15px; line-height:1.55; }
+.focus { font-size:10px; color:#c7d5b8; margin:19px 0 10px; }
+.availability { color:#b7c0b3; font-size:11px; gap:16px; }
+.open-book { display:inline-flex; gap:40px; align-items:center; margin-top:28px; padding:10px 0; border-bottom:1px solid #a7b58d; color:var(--ink); text-decoration:none; font-size:14px; }
+.open-book span { font-size:21px; }
+.space-scene { position:absolute; inset:0; width:100%; height:100%; margin:0; z-index:0; display:block; background:#101615; }
+.space-scene:after { content:''; position:absolute; inset:0; background:linear-gradient(90deg,rgba(12,19,17,.78),transparent 65%); pointer-events:none; }
+#space { width:100%; height:100%; max-width:none; aspect-ratio:auto; image-rendering:pixelated; }
+.space-scene figcaption { left:auto; width:auto; right:28px; bottom:27px; z-index:1; color:#b8c5b0; font-size:9px; letter-spacing:.15em; }
+.space-scene figcaption span { padding:0 0 0 14px; }
+#motion-toggle { z-index:3; top:58px; right:28px; background:#101615bf; font-size:9px; border-color:#46523e; color:#c3ccba; padding:7px 10px; }
+.book-footer { margin:0; border:0; padding:0 30px; height:66px; display:flex; align-items:center; gap:28px; }
+.footer-name { font-size:13px; letter-spacing:-.03em; color:var(--ink); }
+.footer-name span { color:var(--muted); font-size:9px; letter-spacing:0; display:block; margin-top:5px; }
+.footer-social { display:flex; gap:18px; margin-right:auto; font-size:10px; }
+.book-controls { display:flex; align-items:center; gap:14px; margin-left:auto; }
+.book-controls button { display:grid; place-items:center; width:38px; height:38px; border:1px solid #4b5547; border-radius:50%; background:transparent; color:var(--ink); font-size:20px; cursor:pointer; }
+.book-controls button:hover:not(:disabled) { background:var(--accent); color:var(--bg); }
+.book-controls button:disabled { opacity:.25; cursor:default; }
+#page-indicator { min-width:145px; text-align:center; font:10px var(--mono); color:var(--muted); }
+/* Paper chapters retain ordinary scroll access to every entry. */
+.section.book-page { --bg:#e7e5d9; --panel:#e1e0d3; --ink:#202c28; --muted:#55615a; --accent:#405e40; --line:#c2c7b7; color-scheme:light; color:var(--ink); background:var(--bg); padding:40px clamp(24px,5vw,90px) 70px; border:0; }
+.section.book-page::selection { background:#405e40; color:white; }
+.section-heading { margin-bottom:30px; padding-bottom:23px; border-bottom:1px solid var(--line); }
+h2 { font-family:Georgia,'Times New Roman',serif; font-size:clamp(36px,4vw,60px); font-weight:400; letter-spacing:-.045em; }
+.section-heading .eyebrow { font-size:10px; }
+.job { max-width:1100px; padding-left:180px; }
+.job .date { font-size:10px; }
+.job h3 { font-size:17px; }
+.job ul,.job.compact>p:not(.role) { font-size:14px; }
+.role { font-size:12px; }
+.stack { font-size:10px; }
+.project-grid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+.project { padding:22px; background:transparent; border-radius:0; border:1px solid var(--line); }
+.project h3 { font-size:16px; }
+.project .stack { font-size:10px; }
+.project p:not(.stack) { font-size:14px; line-height:1.65; }
+.brand-monogram { background:#cad0b9; color:#334431; }
+.brand-symbol { background:#f0f1ea; }
+.brand-logo { background:#f5f4eb; }
+.about-intro { font-size:16px; line-height:1.8; max-width:1050px; gap:45px; }
+.interests { margin:22px 0 32px; gap:16px; }
+.interests li { padding:16px 25px; font-size:14px; }
+.interests span { font-size:23px; vertical-align:middle; }
+.education { margin-top:22px; }
+.coursework { font-size:12px; }
+.skills dd { font-size:13px; }
+.section.contact { background:#d1dcad; --line:#a8b88a; --accent:#30442a; }
+.contact .section-heading { display:block; border:0; margin-top:4vh; }
+.contact .section-heading .eyebrow { margin-bottom:45px; }
+.contact h2 { font-size:clamp(52px,6.7vw,100px); line-height:1.02; }
+.contact>p { font-size:15px; max-width:470px; margin-top:25px; }
+.contact .email { font-size:clamp(28px,4vw,48px); margin:12px 0 28px; }
+.contact-links { font-size:13px; }
+/* Only JS enables the fixed book. With JS unavailable this is a normal document. */
+.book-ready { height:100dvh; overflow:hidden; }
+.book-ready #main { position:relative; height:calc(100dvh - 126px); perspective:2000px; isolation:isolate; overflow:hidden; background:#060b08; box-shadow:4px 3px 0 #78806d,7px 5px 0 #323d31; }
+.book-ready .book-page { position:absolute; inset:0; min-height:0; height:100%; overflow:auto; overscroll-behavior:contain; scrollbar-width:thin; scrollbar-color:#849175 transparent; transform-origin:0 50%; backface-visibility:hidden; }
+.book-ready .intro { overflow:auto; }
+.book-ready .intro-content { min-height:100%; display:flex; flex-direction:column; align-items:flex-start; justify-content:center; padding-top:85px; padding-bottom:45px; }
+.book-ready .intro-content>* { flex-shrink:0; }
+.book-ready .space-scene { position:fixed; }
+.book-ready .book-page:focus { outline:none; }
+.book-ready .book-page.is-turning { pointer-events:none; }
+@media(min-width:1500px) { .intro-content { width:50%; }.book-ready .intro-content { padding-left:7vw; } }
+@media(max-width:1000px) { nav { gap:16px; }.project-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }.footer-name span { display:none; }.footer-social { gap:12px; }.intro-content { width:60%; }h1 { font-size:90px; }.job { padding-left:145px; } }
+@media(max-width:700px) {
+  .site-header { padding:0 18px; height:94px; gap:8px; align-content:center; flex-wrap:wrap; }
+  nav { flex-basis:100%; order:3; justify-content:space-between; gap:8px; margin:5px 0 0; }
+  nav a { font-size:11px; }nav a span { display:none; }
+  .resume-link { border:0; padding:0; margin-left:auto; font-size:11px; }
+  main { margin:0 8px; }
+  .book-ready #main { height:calc(100dvh - 160px); box-shadow:2px 2px 0 #78806d,4px 4px 0 #323d31; }
+  .intro { min-height:650px; }
+  .cover-edition { top:19px; left:20px; right:20px; font-size:8px; letter-spacing:.1em; }
+  .cover-edition span { display:none; }
+  .book-ready .intro-content,.intro-content { padding:220px 24px 28px; width:100%; min-height:100%; justify-content:flex-end; }
+  .hello { gap:10px; }.hello .eyebrow { font-size:8px; }.hello .eyebrow span { font-size:8px; }.portrait-frame { width:36px; }
+  h1 { font-size:64px; margin:18px 0; letter-spacing:-.055em; }
+  h1 br { display:none; }h1 br:after { content:' '; }
+  .intro-copy { font-size:13px; margin-bottom:4px; }
+  .focus { font-size:9px; margin:12px 0 8px; }.availability { font-size:10px; gap:14px; }
+  .open-book { margin-top:16px; padding:4px 0; font-size:12px; gap:25px; }
+  .space-scene:after { background:linear-gradient(0deg,#101615 6%,rgba(16,22,21,.93) 33%,transparent 77%); }
+  #space { width:100%; max-width:none; height:100%; }
+  .space-scene figcaption { display:none; }
+  #motion-toggle { top:43px; right:18px; font-size:8px; padding:6px; }
+  .book-footer { height:66px; padding:0 17px; gap:8px; }.footer-name { font-size:10px; }.footer-social { display:none; }
+  .book-controls { gap:8px; }.book-controls button { width:32px; height:32px; font-size:18px; }#page-indicator { min-width:100px; font-size:9px; }
+  .section.book-page { padding:24px 22px 45px; }
+  .section-heading { display:block; padding-bottom:18px; margin-bottom:23px; }.section-heading .eyebrow { margin-bottom:10px; font-size:9px; }
+  h2 { font-size:39px; }
+  .job { padding-left:0; }.job-heading { display:block; }.job .date,.job:first-of-type .date { position:static; margin:5px 0 0 44px; }.job h3 { font-size:15px; }.job .date { font-size:10px; }.job ul,.job.compact>p:not(.role) { font-size:13px; }
+  .project-grid { grid-template-columns:1fr; gap:15px; }.project { padding:18px; }.project h3 { font-size:16px; }.project p:not(.stack) { font-size:14px; }
+  .about-intro { grid-template-columns:1fr; font-size:14px; gap:5px; }.interests { gap:8px; }.interests li { font-size:11px; padding:8px 11px; }.interests span { font-size:17px; }
+  .education { grid-template-columns:1fr; }.education>.date { padding:0; margin-left:44px; }.coursework { font-size:11px; }.skills { grid-template-columns:1fr; }
+  .contact .section-heading { margin-top:2vh; }.contact .section-heading .eyebrow { margin-bottom:35px; }.contact h2 { font-size:48px; }.contact>p { font-size:14px; }.contact .email { font-size:27px; }.contact-links { flex-wrap:wrap; gap:18px; font-size:12px; }
+}
+@media(max-width:380px) { h1 { font-size:53px; }.book-ready .intro-content { padding-left:20px; padding-right:20px; }.footer-name { display:none; }.book-controls { margin:auto; } }
+@media(max-height:740px) and (min-width:701px) { .book-ready .intro-content { padding-top:65px; padding-bottom:20px; }h1 { font-size:76px; margin:15px 0; }.open-book { margin-top:12px; }.intro-copy { font-size:13px; }.focus { margin-top:10px; } }
+@media print { .book-ready { height:auto; overflow:visible; }.book-ready #main { height:auto; box-shadow:none; }.book-ready .book-page { position:relative; height:auto; overflow:visible; display:block!important; break-before:page; }.site-header,.book-footer,#motion-toggle { display:none; } }

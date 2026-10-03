@@ -6,10 +6,14 @@ A fast, accessible, single-page portfolio built with plain HTML, CSS, and a smal
 
 - `index.html`: introduction, projects, experience, education, skills, and contact details.
 - `styles.css`: layout, typography, colors, and responsive styles.
-- `script.js`: current-section navigation, footer year, and the original procedural pixel-space animation.
+- `book.css`: full-viewport cover, paper chapters, responsive book layout.
+- `book.js`: page turns, chapter links, browser history, keyboard and swipe navigation.
+- `script.js`: original procedural pixel-art planets, moons, and animated star field.
 - `Zhandos-Brown-resume.pdf`: downloadable résumé; replace this file to update it.
 
-All nine roles and nine projects are visible, with experience first and direct section navigation. The page includes photography, design, and skiing interests. Content and links work without JavaScript. The decorative canvas uses an original dithered planet, respects reduced-motion preferences, has a pause control, and stops animating when offscreen or in a background tab. No external animation assets or libraries are used.
+The portfolio opens as a five-chapter book: cover, experience, projects, about, and contact. Turn pages with the bottom arrows, left/right keys, or a horizontal swipe; chapter links support direct URLs and browser history. Longer chapters scroll within the page, and all nine roles and nine projects remain available without disclosure controls. Inactive pages are hidden and inert for keyboard and assistive-technology navigation.
+
+The full-page solar-system cover is original canvas artwork, with a ringed world, a blue world, a rust-colored planet, moons, drifting stars, and an occasional shooting star. It uses cached low-resolution planet textures, caps drawing at 24 FPS, pauses outside the cover or a foreground tab, and supports a manual pause button. Reduced-motion preferences disable automatic animation and page-turn effects. Without JavaScript, the site remains a readable document with ordinary anchor links. No external graphics libraries, models, services, or API keys are required.
 
 ## Local preview
 
