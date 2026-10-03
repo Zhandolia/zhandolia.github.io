@@ -1,30 +1,29 @@
 # Zhandos Brown — Portfolio
 
-A fast, accessible, single-page portfolio built with plain HTML, CSS, and a small JavaScript enhancement. There are no packages to install or build steps.
+A static three-panel portfolio at https://zhandolia.github.io/ with About, Work, and Projects. Built with plain HTML, CSS, and JavaScript; no packages or build step.
 
-## Edit
+## Editing
 
-- `index.html`: introduction, projects, experience, education, skills, and contact details.
-- `styles.css`: layout, typography, colors, and responsive styles.
-- `book.css`: full-viewport cover, paper chapters, responsive book layout.
-- `book.js`: page turns, chapter links, browser history, keyboard and swipe navigation.
-- `script.js`: original procedural pixel-art planets, moons, and animated star field.
-- `Zhandos-Brown-resume.pdf`: downloadable résumé; replace this file to update it.
+- `index.html`: all personal content, nine roles, nine projects, and contact links.
+- `panels.css`: matching numbered accordion layout, typography, colors, and mobile styles.
+- `panels.js`: panel navigation, direct hashes, legacy links, keyboard controls, and Dallas local time.
+- `script.js`: original animated monochrome pixel-space illustration, with pause and reduced-motion support.
+- `previews/`: screenshots of six public project demos; remaining projects use their existing branding.
+- `fonts/`: locally hosted Barlow Condensed and IBM Plex Mono with their SIL Open Font Licenses.
+- `Zhandos-Brown-resume.pdf`: downloadable résumé.
 
-The portfolio opens as a five-chapter book: cover, experience, projects, about, and contact. Turn pages with the bottom arrows, left/right keys, or a horizontal swipe; chapter links support direct URLs and browser history. Longer chapters scroll within the page, and all nine roles and nine projects remain available without disclosure controls. Inactive pages are hidden and inert for keyboard and assistive-technology navigation.
+## Behavior
 
-The full-page solar-system cover is original canvas artwork, with a ringed world, a blue world, a rust-colored planet, moons, drifting stars, and an occasional shooting star. It uses cached low-resolution planet textures, caps drawing at 24 FPS, pauses outside the cover or a foreground tab, and supports a manual pause button. Reduced-motion preferences disable automatic animation and page-turn effects. Without JavaScript, the site remains a readable document with ordinary anchor links. No external graphics libraries, models, services, or API keys are required.
+Desktop panels expand horizontally, with vertical labels on collapsed panels. On phones they stack vertically. All three panel controls remain visible, and each open panel scrolls independently. Browser history and #about, #work, and #projects links work; old #top, #experience, and #contact URLs remain supported. Inactive content is hidden and inert. Without JavaScript the three sections remain readable in document order.
 
-## Local preview
+The canvas artwork is procedural and uses no external assets or graphics libraries. Animation pauses off the active About panel or in a background tab. Reduced-motion preferences disable automatic animation and panel transitions. A manual animation control remains available.
 
-Open `index.html` directly, or run `python -m http.server 8000` from this directory and visit `http://localhost:8000`.
+## Local preview and deployment
 
-## GitHub Pages
+Run `python -m http.server 8000` from this directory, then visit http://localhost:8000.
 
-This repository serves the portfolio at https://zhandolia.github.io/.
+GitHub Pages deploys **main / (root)** automatically. `.nojekyll` preserves static serving. The `drivmi/` demo is independent and unchanged by the portfolio layout.
 
-Pages uses **Deploy from a branch**, **main**, **/ (root)**. Changes pushed to `main` publish automatically. `.nojekyll` tells Pages to serve these files as static assets.
+## Sources
 
-## Content
-
-Content is adapted from the supplied September 2026 résumé and the previous portfolio at https://zhandosbrown.vercel.app/. The latest résumé takes precedence for recent roles, education, and location. Earlier work from the previous website is retained. There are no analytics, trackers, cookies, remote fonts, or contact-form services.
+Layout, palette, and typography follow the user-selected reference at https://www.rajdeepgill.me/. Personal content, project assets, and the procedural space illustration are Zhandos’s portfolio content. Résumé content takes precedence for recent roles and education. Fonts come from Google Fonts and are served locally with their licenses. No analytics, tracking services, external font requests, or API keys are needed.

@@ -11,7 +11,7 @@
   const stars = Array.from({length:240}, () => ({x:random(),y:random(),phase:random()*6.28,size:random()>.96?2:1,speed:.2+random()*.7}));
   let width = 0, height = 0, worlds = [], paused = reduced.matches;
   let frame = 0, elapsed = 0, lastTime = 0;
-  let coverVisible = !document.querySelector('#top').hidden;
+  let coverVisible = document.querySelector('#about').classList.contains('active') || !document.body.classList.contains('panels-ready');
 
   function makeWorld(radius, kind) {
     const ringed = kind === 'ringed';
@@ -21,7 +21,7 @@
     art.width = size; art.height = size;
     const paint = art.getContext('2d');
     const middle = size / 2;
-    const tilt = -.48, cos = Math.cos(tilt), sin = Math.sin(tilt);
+    const tilt = .68, cos = Math.cos(tilt), sin = Math.sin(tilt);
     for (let y = 0; y < size; y++) {
       for (let x = 0; x < size; x++) {
         const dx = (x-middle)/radius, dy = (y-middle)/radius;
@@ -29,12 +29,12 @@
         const u = dx*cos+dy*sin, v = -dx*sin+dy*cos;
         const rd = Math.hypot(u/1.85,v/.55);
         const ring = ringed && rd>.72 && rd<1.22;
-        let brightness = 0, light = '#c5d2ab', dark = '#26372f';
+        let brightness = 0, light = '#d9d6cf', dark = '#1e1b18';
         if (ring && (d>1 || v>.1)) {
           const gap = rd>1.03 && rd<1.065;
           brightness = gap ? .025 : (.64+.21*Math.sin(rd*150))*(.85-.18*dx);
           if (u>.35 && v<.18) brightness *= .22;
-          light = '#d5cfa4'; dark = '#29392e';
+          light = '#d9d6cf'; dark = '#1e1b18';
         } else if (d<=1) {
           const z = Math.sqrt(1-d);
           const illumination = Math.max(0,-.61*dx-.4*dy+.57*z);
@@ -64,33 +64,21 @@
     // Layout dimensions stay stable while the page is rotating in 3D.
     const bounds = { width: canvas.clientWidth, height: canvas.clientHeight };
     // A deliberately low resolution makes square pixels visible, even on Retina.
-    const newWidth = Math.max(1,Math.ceil(bounds.width/2));
-    const newHeight = Math.max(1,Math.ceil(bounds.height/2));
+    const newWidth = Math.max(1,Math.ceil(bounds.width/3));
+    const newHeight = Math.max(1,Math.ceil(bounds.height/3));
     if (newWidth===width && newHeight===height) return;
     width = canvas.width = newWidth; height = canvas.height = newHeight;
     context.imageSmoothingEnabled = false;
     const mobile = bounds.width<700;
-    const r = Math.min(width*(mobile?.24:.17),height*(mobile?.19:.29));
-    worlds = [
-      {art:makeWorld(r*.34,'blue'),x:mobile?.16:.48,y:mobile?.13:.20,phase:2,drift:2},
-      {art:makeWorld(r*.24,'rust'),x:mobile?.90:.91,y:mobile?.43:.17,phase:4,drift:3},
-      {art:makeWorld(r*.16,'moon'),x:mobile?.19:.90,y:mobile?.40:.81,phase:1,drift:2},
-      {art:makeWorld(r,'ringed'),x:mobile?.60:.73,y:mobile?.24:.55,phase:0,drift:3},
-      {art:makeWorld(r*.08,'moon'),x:mobile?.87:.50,y:mobile?.10:.78,phase:3,drift:4}
-    ];
+    const r = Math.min(width*.29,height*.48);
+    worlds = [{art:makeWorld(r,'ringed'),x:.63,y:.68,phase:0,drift:2}];
     draw(elapsed);
   }
   function draw(time) {
-    context.fillStyle = '#101615'; context.fillRect(0,0,width,height);
-    // A quiet, dotted orbital path ties the worlds together.
-    context.strokeStyle = '#29392c'; context.lineWidth = .5;
-    context.setLineDash([1,5]);
-    context.beginPath();
-    context.ellipse(width*.7,height*.48,width*.36,height*.30,-.4,0,Math.PI*2);
-    context.stroke(); context.setLineDash([]);
+    context.fillStyle = '#1e1b18'; context.fillRect(0,0,width,height);
     for (const star of stars) {
       const alpha = .24+.27*(1+Math.sin(star.phase+time*.0005));
-      context.fillStyle = `rgba(192,211,176,${alpha})`;
+      context.fillStyle = `rgba(216,213,205,${alpha})`;
       const x = Math.floor((star.x*width+time*.001*star.speed)%width);
       const y = Math.floor(star.y*height);
       context.fillRect(x,y,star.size,star.size);
@@ -112,7 +100,7 @@
       const progress = streak/1800;
       const x = Math.round(width*(.45+progress*.22)), y = Math.round(height*(.03+progress*.17));
       for (let i=0;i<14;i++) {
-        context.fillStyle = `rgba(211,225,184,${(1-i/14)*.65})`;
+        context.fillStyle = `rgba(216,213,205,${(1-i/14)*.65})`;
         context.fillRect(x-i,y-Math.floor(i*.4),1,1);
       }
     }
@@ -134,8 +122,8 @@
   button.addEventListener('click',()=>{paused=!paused;sync();});
   reduced.addEventListener('change',event=>{paused=event.matches;sync();});
   document.addEventListener('visibilitychange',sync);
-  document.addEventListener('bookpagechange',event=>{
-    coverVisible=event.detail.page==='top';
+  document.addEventListener('panelchange',event=>{
+    coverVisible=event.detail.page==='about';
     if (coverVisible) resize();
     sync();
   });
