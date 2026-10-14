@@ -86,12 +86,14 @@ ul{margin:0;padding:0}
 .panels-ready .panel:not(.active) .panel-tab:hover .panel-label{color:var(--text)}
 
 /* ---------- About ---------- */
-.intro{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;padding-bottom:36px;border-bottom:1px solid var(--line)}
-.intro h1{font:600 clamp(32px,5vw,46px)/1.15 var(--head);letter-spacing:-.02em;margin:0}
-.tagline{font-size:18px;color:var(--muted);margin-top:10px;max-width:34em}
+/* Three columns sized to fit one desktop screen without scrolling: profile · story + photos · education + skills. */
+.about-layout{max-width:1200px;min-height:100%;display:grid;grid-template-columns:minmax(250px,1fr) minmax(0,1.1fr) minmax(0,1fr);gap:24px 44px;align-content:center;align-items:start;padding-top:28px;padding-bottom:28px}
+.profile h1{font:600 clamp(28px,2.6vw,38px)/1.15 var(--head);letter-spacing:-.02em;margin:0}
+.profile .portrait-frame{margin-bottom:22px}
+.tagline{font-size:16px;color:var(--muted);margin-top:8px;max-width:34em}
 .meta{font-size:14px;color:var(--faint);margin-top:12px}
 /* Crops the full-length photo to a face-centred circle: face sits at ~(56.7%, 52.1%) of the source image. */
-.portrait-frame{position:relative;width:184px;height:184px;border-radius:50%;overflow:hidden;border:1px solid var(--line)}
+.portrait-frame{position:relative;width:clamp(200px,34vh,280px);aspect-ratio:1;border-radius:50%;overflow:hidden;border:1px solid var(--line)}
 .portrait-frame img{position:absolute;width:330%;max-width:none;height:auto;left:-137%;top:-179%}
 .links{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
 .button{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border:1px solid var(--line);border-radius:10px;color:var(--text);font-size:14px;font-weight:500;background:var(--surface)}
@@ -99,15 +101,14 @@ ul{margin:0;padding:0}
 .button.primary{background:var(--text);color:var(--bg);border-color:var(--text)}
 .button.primary:hover{background:var(--accent);border-color:var(--accent);color:#fff}
 .button svg{width:16px;height:16px;fill:currentColor}
-.about-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;padding-top:32px}
-.about-text p+p{margin-top:14px}
-.photos{display:grid;grid-template-columns:repeat(2,1fr);gap:16px 12px;margin-top:22px}
-.photos img{position:relative;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:8px;cursor:zoom-in;transition:transform .25s ease,box-shadow .25s ease}
+.about-text p+p{margin-top:12px}
+.photos{display:grid;grid-template-columns:repeat(2,1fr);gap:14px 12px;margin-top:18px}
+.photos img{position:relative;width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:8px;cursor:zoom-in;transition:transform .25s ease,box-shadow .25s ease}
 .photos img:hover,.photos img:focus-visible{z-index:2;transform:scale(1.7);box-shadow:0 12px 40px #0006;outline:none}
 .photos figure:nth-child(odd) img{transform-origin:left center}
 .photos figure:nth-child(even) img{transform-origin:right center}
 .photos figcaption{font-size:12px;line-height:1.35;color:var(--faint);margin-top:6px}
-.facts{display:grid;gap:22px;align-content:start}
+.facts{display:grid;gap:20px;align-content:start}
 .facts h3{font:600 14px var(--body)}
 .facts p,.facts dd{color:var(--muted);font-size:14px}
 .edu{display:flex;gap:12px;align-items:center;margin-top:8px}
@@ -171,9 +172,19 @@ footer nav a{display:flex;padding:9px;border-radius:9px;color:var(--muted)}
 footer nav a:hover{color:var(--text);background:var(--accent-soft)}
 footer svg{width:22px;height:22px;fill:currentColor}
 
+@media (min-width:768px) and (max-height:760px){
+  .about-layout{padding-top:16px;padding-bottom:16px}
+  .portrait-frame{width:clamp(160px,26vh,280px)}
+  .profile .portrait-frame{margin-bottom:16px}
+  .tagline{font-size:15px}
+  .links{margin-top:16px}
+}
+@media (max-width:1180px){
+  .about-layout{grid-template-columns:minmax(220px,.8fr) minmax(0,1.2fr)}
+  .facts{grid-column:1/-1;grid-template-columns:1fr 1fr;gap:32px}
+}
 @media (max-width:900px){
   .feature{grid-template-columns:1fr;gap:18px}
-  .about-grid{grid-template-columns:1fr}
 }
 @media (max-width:767px){
   .panels-ready .panels{height:calc(100dvh - 60px);flex-direction:column}
@@ -184,8 +195,9 @@ footer svg{width:22px;height:22px;fill:currentColor}
   .panels-ready .panel:not(.active) .panel-number:before{display:inline-block;margin:0 10px 0 0}
   .panels-ready .panel:not(.active) .panel-label{writing-mode:horizontal-tb;font-size:18px}
   .inner{padding:24px 16px 40px}
-  .intro{grid-template-columns:1fr;gap:18px}
-  .portrait-frame{width:128px;height:128px;grid-row:1}
+  .about-layout{grid-template-columns:1fr;gap:28px;min-height:0;align-content:start}
+  .facts{grid-template-columns:1fr;gap:20px}
+  .portrait-frame{width:168px}
   .photos img:hover,.photos img:focus-visible{transform:scale(1.6)}
   .job{grid-template-columns:1fr;gap:10px}
   .feature{padding:14px}
