@@ -11,8 +11,8 @@
   <meta property="og:type" content="website">
   <title>Zhandos Brown — Software Engineer</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20width%3D%2764%27%20height%3D%2764%27%20rx%3D%2714%27%20fill%3D%27%231b1d22%27/%3E%3Ctext%20x%3D%2732%27%20y%3D%2743%27%20text-anchor%3D%27middle%27%20font-family%3D%27Arial%2Csans-serif%27%20font-weight%3D%27700%27%20font-size%3D%2730%27%20fill%3D%27%23fbfbf9%27%3EZB%3C/text%3E%3C/svg%3E">
-  <link rel="stylesheet" href="panels.css?v=20261013-simple">
-  <script src="panels.js?v=20261013-simple" defer></script>
+  <link rel="stylesheet" href="panels.css?v=20261013-fixes">
+  <script src="panels.js?v=20261013-fixes" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#about-content">Skip to content</a>
@@ -34,7 +34,7 @@
                 <a class="button" href="https://www.linkedin.com/in/zhanbrown/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 2h20v20H2zm3 7v10h3V9zm1.5-4.5a1.7 1.7 0 1 0 0 3.4 1.7 1.7 0 0 0 0-3.4ZM10 9v10h3v-5.3c0-2.8 4-3 4 0V19h3v-6.4c0-4.9-5.2-4.7-7-2.3V9Z"/></svg>LinkedIn</a>
               </div>
             </div>
-            <img class="intro-portrait" src="zhandos-brown.webp" alt="Zhandos Brown" width="900" height="1200" fetchpriority="high">
+            <div class="portrait-frame"><img src="zhandos-brown.webp" alt="Zhandos Brown" width="900" height="1200" fetchpriority="high"></div>
           </div>
 
           <div class="about-grid">
@@ -42,10 +42,10 @@
               <p>I’m from Kazakhstan and based in Dallas. My path into software began with high school robotics and grew into work on perception systems, ML backends, and mobile products — tools for understanding the physical world.</p>
               <p>Outside of engineering, I love photography, design, and skiing. A few favorites:</p>
               <div class="photos">
-                <img src="photos/canyon.webp" alt="A winding river through pink sandstone canyons at sunset" width="1280" height="960" loading="lazy">
-                <img src="photos/mountains.webp" alt="Snow-dusted mountains above an open meadow and pine forest" width="720" height="1280" loading="lazy">
-                <img src="photos/desert-portrait.webp" alt="Me in a sun hat beside an off-road vehicle in the desert" width="1280" height="960" loading="lazy">
-                <img src="photos/meadow.webp" alt="Bison grazing in a green valley below forested cliffs" width="1280" height="960" loading="lazy">
+                <img src="photos/canyon.webp" alt="A winding river through pink sandstone canyons at sunset" width="1280" height="960" loading="lazy" tabindex="0">
+                <img src="photos/mountains.webp" alt="Snow-dusted mountains above an open meadow and pine forest" width="720" height="1280" loading="lazy" tabindex="0">
+                <img src="photos/desert-portrait.webp" alt="Me in a sun hat beside an off-road vehicle in the desert" width="1280" height="960" loading="lazy" tabindex="0">
+                <img src="photos/meadow.webp" alt="Bison grazing in a green valley below forested cliffs" width="1280" height="960" loading="lazy" tabindex="0">
               </div>
             </div>
             <div class="facts">
@@ -100,7 +100,7 @@
                   <li>Refactored a legacy monolithic iOS document-rendering engine into modular SwiftUI components, improving code maintainability and enabling 40% faster development cycles through declarative UI architecture.</li>
                   <li>Optimized content retrieval and rendering pipelines, achieving a 70% latency reduction (300 to 90 ms) and improving user experience across 100K+ daily active sessions.</li>
                 </ul>
-                <ul class="tags" aria-label="Tools"><li>Swift</li><li>SwiftUI</li><li>iOS</li></ul>
+                <ul class="tags" aria-label="Tools"><li>Swift</li><li>SwiftUI</li><li>iOS</li><li>GraphQL</li><li>REST APIs</li><li>Java</li><li>Jenkins</li></ul>
               </div>
             </li>
             <li class="job">
@@ -127,7 +127,7 @@
         <div class="inner">
           <div class="featured">
             <article class="feature">
-              <a class="shot" href="https://zhandolia.github.io/ring-dynamics/" aria-label="Open Ring Dynamics"><img src="previews/ring.png" alt="Ring Dynamics analysis dashboard" width="1280" height="720" loading="lazy"></a>
+              <a class="shot wide" href="https://zhandolia.github.io/ring-dynamics/fight/#sample" aria-label="Watch the Ring Dynamics sample analysis"><img src="previews/ring-dynamics.gif" alt="Ring Dynamics tracking both fighters with live activity, aggression, and ring-control metrics" width="600" height="273" loading="lazy"></a>
               <div>
                 <div class="feature-title"><img src="logos/ring-dynamics.svg" alt="" width="30" height="30"><h3>Ring Dynamics</h3></div>
                 <p class="kicker">Real-time pose-based combat analytics</p>
@@ -166,7 +166,7 @@
                   <li>4,488 3D points per frame, checked against 42 shared validation fixtures.</li>
                 </ul>
                 <ul class="tags" aria-label="Tools"><li>React</li><li>TypeScript</li><li>Three.js</li><li>Python</li></ul>
-                <p class="project-links"><a href="https://zhandolia.github.io/kinetic-robotics-studio/">Live demo →</a></p>
+                <p class="project-links"><a href="https://zhandolia.github.io/kinetic-robotics-studio/">Live demo →</a><a href="https://github.com/Zhandolia/kinetic-robotics-studio">Code →</a></p>
               </div>
             </article>
           </div>
