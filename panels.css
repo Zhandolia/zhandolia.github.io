@@ -91,7 +91,7 @@ ul{margin:0;padding:0}
 .tagline{font-size:18px;color:var(--muted);margin-top:10px;max-width:34em}
 .meta{font-size:14px;color:var(--faint);margin-top:12px}
 /* Crops the full-length photo to a face-centred circle: face sits at ~(56.7%, 52.1%) of the source image. */
-.portrait-frame{position:relative;width:136px;height:136px;border-radius:50%;overflow:hidden;border:1px solid var(--line)}
+.portrait-frame{position:relative;width:184px;height:184px;border-radius:50%;overflow:hidden;border:1px solid var(--line)}
 .portrait-frame img{position:absolute;width:330%;max-width:none;height:auto;left:-137%;top:-179%}
 .links{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
 .button{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border:1px solid var(--line);border-radius:10px;color:var(--text);font-size:14px;font-weight:500;background:var(--surface)}
@@ -101,11 +101,12 @@ ul{margin:0;padding:0}
 .button svg{width:16px;height:16px;fill:currentColor}
 .about-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;padding-top:32px}
 .about-text p+p{margin-top:14px}
-.photos{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:22px}
-.photos img{position:relative;width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px;cursor:zoom-in;transition:transform .25s ease,box-shadow .25s ease}
-.photos img:hover,.photos img:focus-visible{z-index:2;transform:scale(2.2);box-shadow:0 12px 40px #0006;outline:none}
-.photos img:first-child{transform-origin:left center}
-.photos img:last-child{transform-origin:right center}
+.photos{display:grid;grid-template-columns:repeat(2,1fr);gap:16px 12px;margin-top:22px}
+.photos img{position:relative;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:8px;cursor:zoom-in;transition:transform .25s ease,box-shadow .25s ease}
+.photos img:hover,.photos img:focus-visible{z-index:2;transform:scale(1.7);box-shadow:0 12px 40px #0006;outline:none}
+.photos figure:nth-child(odd) img{transform-origin:left center}
+.photos figure:nth-child(even) img{transform-origin:right center}
+.photos figcaption{font-size:12px;line-height:1.35;color:var(--faint);margin-top:6px}
 .facts{display:grid;gap:22px;align-content:start}
 .facts h3{font:600 14px var(--body)}
 .facts p,.facts dd{color:var(--muted);font-size:14px}
@@ -184,11 +185,8 @@ footer svg{width:22px;height:22px;fill:currentColor}
   .panels-ready .panel:not(.active) .panel-label{writing-mode:horizontal-tb;font-size:18px}
   .inner{padding:24px 16px 40px}
   .intro{grid-template-columns:1fr;gap:18px}
-  .portrait-frame{width:96px;height:96px;grid-row:1}
-  .photos{grid-template-columns:repeat(2,1fr)}
-  .photos img:nth-child(odd){transform-origin:left center}
-  .photos img:nth-child(even){transform-origin:right center}
-  .photos img:hover,.photos img:focus-visible{transform:scale(1.8)}
+  .portrait-frame{width:128px;height:128px;grid-row:1}
+  .photos img:hover,.photos img:focus-visible{transform:scale(1.6)}
   .job{grid-template-columns:1fr;gap:10px}
   .feature{padding:14px}
   footer{height:60px;padding:0 14px}
